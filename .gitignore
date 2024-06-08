@@ -1,0 +1,70 @@
+# Ignore PyCharm-specific files
+.idea/
+*.iml
+
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directories
+env/
+venv/
+ENV/
+ENV.bak/
+venv.bak/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore Python eggs and wheels
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+
+# Ignore pytest cache
+.pytest_cache/
+
+# Ignore mypy cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ignore Pyre type checker files
+.pyre/
+
+# Ignore profiling data
+.prof
+
+# Ignore PEP 582 (https://www.python.org/dev/peps/pep-0582/) local packages directory
+__pypackages__/
+
+# Ignore SQLite database files
+*.sqlite3
+
+# Ignore Logs
+logs/
+*.log
+
+# Ignore Unit test / coverage reports
+*.out
+*.err
+
+# Ignore editor-specific files (not just PyCharm)
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore MacOS and Linux specific files
+.DS_Store
+*.swp

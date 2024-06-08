@@ -35,3 +35,26 @@ def generate_play_url(coord, map_type="cell_all"):
 def generate_tmobile_url(coord):
     y_value = int(math.pow(2, coord['z']) - 1)
     return f"https://mapa9.t-mobile.pl/maps_new/2G/{coord['z']}/{coord['x']}/{y_value-coord['y']}.png"
+
+def generate_orange_url(coord, map_type="2g"):
+    """
+        Map address: https://www.orange.pl/view/mapazasiegu
+        :param coord:
+        :param map_type: type of map
+            internet2G - 2G
+            internet3G - 3G
+            internet4G - 4G
+            internet5G - 5G (350 Mb/s CA)
+            internet5gC - 5G C-band
+        :return: url as string
+    """
+    layer_parameter = {
+        "internet2g": "cov_gsm_opl",
+        "internet3G": "cov_umts_opl",
+        "internet4G": "cov_lte_opl",
+        "internet5G": "cov_ca_5g",
+        "internet5gC": "cov_c_band"
+    }
+    if map_type not in layer_parameter:
+        raise ValueError("Invalid map_type for Orange")
+    return f"https://www.orange.pl/rangemaps/wmts?&request=getTile&Layer=orangeCoverage:{layer_parameter[map_type]}&format=image/png8&Tilematrixset=EPSG:900913&Tilematrix=EPSG:900913:{coord['z']}&Tilerow={coord['y']}&TileCol={coord['x']}&style=orangeCoverage:{map_type}"
