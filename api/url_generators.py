@@ -29,12 +29,23 @@ def generate_play_url(coord, map_type="cell_all"):
             airfiber - NET BOX
         :return: url as string
     """
-    return f"https://internet.play.pl/maps-resources/tiles/{map_type}/{coord['z']}/{coord['x']}/{1023 - coord['y']}.png"
-
-
-def generate_tmobile_url(coord):
     y_value = int(math.pow(2, coord['z']) - 1)
-    return f"https://mapa9.t-mobile.pl/maps_new/2G/{coord['z']}/{coord['x']}/{y_value-coord['y']}.png"
+    return f"https://internet.play.pl/maps-resources/tiles/{map_type}/{coord['z']}/{coord['x']}/{y_value - coord['y']}.png"
+
+
+def generate_tmobile_url(coord, map_type="2G"):
+    """
+        Map address: https://www.t-mobile.pl/c/mapa-zasiegu
+        :param coord: coordinates (x,y,z)
+        :param map_type: type of map
+            2G - GSM/GPRS/EDGE network
+            4G - 4G/LTE network
+            5G - 5G network
+            5G-more - 5G in 3.7-3.8 GHz band
+        :return: url as string
+    """
+    y_value = int(math.pow(2, coord['z']) - 1)
+    return f"https://mapa4.t-mobile.pl/maps_new/{map_type}/{coord['z']}/{coord['x']}/{y_value-coord['y']}.png"
 
 def generate_orange_url(coord, map_type="2g"):
     """
@@ -58,3 +69,18 @@ def generate_orange_url(coord, map_type="2g"):
     if map_type not in layer_parameter:
         raise ValueError("Invalid map_type for Orange")
     return f"https://www.orange.pl/rangemaps/wmts?&request=getTile&Layer=orangeCoverage:{layer_parameter[map_type]}&format=image/png8&Tilematrixset=EPSG:900913&Tilematrix=EPSG:900913:{coord['z']}&Tilerow={coord['y']}&TileCol={coord['x']}&style=orangeCoverage:{map_type}"
+
+
+def generate_o2_slovakia_url(coord, map_type="edge"):
+    """
+        Map address: https://www.o2.sk/podpora/siet-a-pokrytie/mapa-dostupnosti-sluzieb-o2
+        :param coord: coordinates (x,y,z)
+        :param map_type: type of map
+            edge - GPRS/EDGE network, up to 250 kb/s
+            hspa - 3G network, up to 14,4 Mb/s
+            lte - LTE network, up to 73 Mb/s
+            5g - 5G network, up to 200 Mb/s
+        :return: url as string
+    """
+    return f"https://mapy.o2.sk/backend/sk/tile/{map_type}/z{coord['z']}-x{coord['x']}-y{coord['y']}.png"
+
