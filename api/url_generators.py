@@ -29,8 +29,8 @@ def generate_play_url(coord, map_type="cell_all"):
             airfiber - NET BOX
         :return: url as string
     """
-    y_value = int(math.pow(2, coord['z']) - 1)
-    return f"https://internet.play.pl/maps-resources/tiles/{map_type}/{coord['z']}/{coord['x']}/{y_value - coord['y']}.png"
+    y_value = int(math.pow(2, coord['z']) - 1) - coord['y']
+    return f"https://internet.play.pl/maps-resources/tiles/{map_type}/{coord['z']}/{coord['x']}/{y_value}.png"
 
 
 def generate_orange_url(coord, map_type="internet2G"):
