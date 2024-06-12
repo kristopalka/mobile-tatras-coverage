@@ -17,7 +17,7 @@ def overlay_layers(background, image, alfa=0.2):
     return out
 
 
-def create_map(center_tile_coords, url_generator, grid_size=(5, 5)):
+def create_map(center_tile_coords, url_generator, grid_size=(3, 5)):
     rows, cols = grid_size
     tile = fetch_image(url_generator(center_tile_coords))
     size = tile.shape[0]
