@@ -17,6 +17,7 @@ tile_coords = geo_to_wmts_coords(zakopane_coords, zoom)
 image = create_map(tile_coords, generate_google_maps_url)
 image = overlay_layers(image, create_map(tile_coords, generate_play_url))
 image = overlay_layers(image, create_map(tile_coords, generate_tmobile_url))
+image = overlay_layers(image, create_map(tile_coords, generate_orange_url))
 image = overlay_layers(image, create_map(tile_coords, generate_o2_slovakia_url), alfa=0.5)
 
 

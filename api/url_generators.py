@@ -32,7 +32,9 @@ def generate_play_url(coord, map_type="cell_all"):
     y_value = int(math.pow(2, coord['z']) - 1)
     return f"https://internet.play.pl/maps-resources/tiles/{map_type}/{coord['z']}/{coord['x']}/{y_value - coord['y']}.png"
 
-def generate_orange_url(coord, map_type="2g"):
+
+def generate_orange_url(coord, map_type="internet2G"):
+    # todo wyrzuca error RemoteDisconnected("Remote end closed connection without", prawdopodobnie potrzeba jakiegoś cookies
     """
         Map address: https://www.orange.pl/view/mapazasiegu
         :param coord:
@@ -45,7 +47,7 @@ def generate_orange_url(coord, map_type="2g"):
         :return: url as string
     """
     layer_parameter = {
-        "internet2g": "cov_gsm_opl",
+        "internet2G": "cov_gsm_opl",
         "internet3G": "cov_umts_opl",
         "internet4G": "cov_lte_opl",
         "internet5G": "cov_ca_5g",
@@ -55,14 +57,17 @@ def generate_orange_url(coord, map_type="2g"):
         raise ValueError("Invalid map_type for Orange")
     return f"https://www.orange.pl/rangemaps/wmts?&request=getTile&Layer=orangeCoverage:{layer_parameter[map_type]}&format=image/png8&Tilematrixset=EPSG:900913&Tilematrix=EPSG:900913:{coord['z']}&Tilerow={coord['y']}&TileCol={coord['x']}&style=orangeCoverage:{map_type}"
 
+
 def generate_plus_url(coord, map_type=""):
+    # todo nie wyświetla (prawdopodobnie potrzebuje dodatkowych cookies)
+    # todo dodać map_type
     """
         Map address: https://www.plus.pl/mapa-zasiegu
         :param coord: coordinates (x,y,z)
         :param map_type: type of map
         :return: url as string
     """
-    return "Not implemented yet"
+    return f"https://gms.plus.pl/service/wmts?LAYER=cov:gimzdumoi&STYLE=&TILEMATRIXSET=EPSG:900913&SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&FORMAT=image/png8&TILEMATRIX=EPSG:900913:{coord['z']}&TILECOL={coord['x']}&TILEROW={coord['y']}"
 
 
 def generate_tmobile_url(coord, map_type="2G"):
@@ -77,9 +82,11 @@ def generate_tmobile_url(coord, map_type="2G"):
         :return: url as string
     """
     y_value = int(math.pow(2, coord['z']) - 1)
-    return f"https://mapa4.t-mobile.pl/maps_new/{map_type}/{coord['z']}/{coord['x']}/{y_value-coord['y']}.png"
+    return f"https://mapa4.t-mobile.pl/maps_new/{map_type}/{coord['z']}/{coord['x']}/{y_value - coord['y']}.png"
+
 
 def generate_orange_slovensko_url(coord, map_type=""):
+    # todo zwraca jeden kafelek o zajmujący całą potrzebną powierzchnię (być może istnieje api z normalnymi kafelkami)
     """
         Map address: https://www.orange.sk/onas/mapa-pokrytia/
         :param coord: coordinates (x,y,z)
@@ -88,7 +95,9 @@ def generate_orange_slovensko_url(coord, map_type=""):
     """
     return "Not implemented yet"
 
+
 def generate_telkom_slovensko_url(coord, map_type=""):
+    # todo nie pobiera PNG (prawdopodobnie pobiera kafelki w formie zaszyfrowanej)
     """
         Map address: https://www.telekom.sk/wiki/mapa-pokrytia#
         :param coord: coordinates (x,y,z)
@@ -96,6 +105,7 @@ def generate_telkom_slovensko_url(coord, map_type=""):
         :return: url as string
     """
     return "Not implemented yet"
+
 
 def generate_o2_slovakia_url(coord, map_type="edge"):
     """
@@ -110,7 +120,9 @@ def generate_o2_slovakia_url(coord, map_type="edge"):
     """
     return f"https://mapy.o2.sk/backend/sk/tile/{map_type}/z{coord['z']}-x{coord['x']}-y{coord['y']}.png"
 
+
 def generate_4ka_url(coord, map_type=""):
+    # todo nie pobiera PNG (prawdopodobnie pobiera kafelki w formie zaszyfrowanej)
     """
         Map address: https://www.4ka.sk/fix/podpora/mapa-pokrytia/
         :param coord: coordinates (x,y,z)
